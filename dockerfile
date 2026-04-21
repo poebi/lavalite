@@ -6,15 +6,15 @@ RUN docker-php-ext-install pdo pdo_mysql
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
-# Allow .htaccess overrides
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+# 1. Set working directory
+WORKDIR /var/www/html
 
-# Copy app files
+# 2. Copy app files FIRST
 COPY . /var/www/html/
 
-# Fix permissions
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
+# 3. Create folders and Fix permissions AFTER copying
+RUN mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache && \
+    chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html && \
+    chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 EXPOSE 80
