@@ -1,8 +1,8 @@
 <?php
-$host = 'localhost';
-$db = 'asdls';
-$user = 'root';
-$pass = '';
+$host = 'ql12.freesqldatabase.com';
+$db = 'sql12823896';
+$user = 'sql12823896';
+$pass = 'yIbLIQBMt5';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
