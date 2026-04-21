@@ -1,9 +1,8 @@
 <?php
-$host = 'sql12.freesqldatabase.com';
-$db = 'sql12823896';
-$user = 'sql12823896';
-$pass = 'yIbLIQBMt5';
-$charset = 'utf8mb4';
+$host = getenv('DB_HOST');
+$db   = getenv('DB_NAME');
+$user = getenv('DB_USER');
+$pass = getenv('DB_PASS');
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
