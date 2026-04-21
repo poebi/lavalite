@@ -1,0 +1,18 @@
+{
+  "name": "lavalite-main",
+  "version": "1.0.0",
+  "description": "**LavaLite** is a lightweight PHP framework designed for developers who want **speed, simplicity, and control** — without the bloat.",
+  "main": "index.js",
+  "scripts": {
+    "build-css": "tailwindcss --input src/input.css --output public/css/style.css --content \"app/views/**/*.php\"",
+    "watch-css": "tailwindcss --input src/input.css --output public/css/style.css --content \"app/views/**/*.php\" --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.2",
+    "tailwindcss": "^4.2.2"
+  }
+}

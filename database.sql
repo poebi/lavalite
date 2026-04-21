@@ -1,0 +1,14 @@
+CREATE DATABASE IF NOT EXISTS asdls;
+USE asdls;
+
+CREATE TABLE IF NOT EXISTS paa_users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    paa_first_name VARCHAR(100) NOT NULL,
+    paa_last_name VARCHAR(100) NOT NULL,
+    paa_email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    paa_gender VARCHAR(20) NOT NULL,
+    paa_adress TEXT NOT NULL,
+    role VARCHAR(50) DEFAULT 'user',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
