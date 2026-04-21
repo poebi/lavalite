@@ -1,24 +1,27 @@
 <?php
-// This pulls the data you just typed into the Render Dashboard
+// 1. Force fetch variables
 $host = getenv('DB_HOST');
 $db   = getenv('DB_DATABASE');
 $user = getenv('DB_USERNAME');
 $pass = getenv('DB_PASSWORD');
-$port = getenv('DB_PORT') ?: '3306';
+
+// 2. DEBUG CHECK: If this triggers, Render isn't passing the data!
+if (!$host || !$db || !$user) {
+    die("FATAL ERROR: Environment variables are missing from Render. 
+         Check your Dashboard > Environment tab.");
+}
 
 try {
-    $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=utf8mb4";
-    $options = [
-        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_EMULATE_PREPARES   => false,
-    ];
+    // 3. Force TCP connection by adding port=3306
+    $dsn = "mysql:host=$host;port=3306;dbname=$db;charset=utf8mb4";
+    
+    $pdo = new PDO($dsn, $user, $pass, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+    ]);
 
-    $pdo = new PDO($dsn, $user, $pass, $options);
-    // Success!
+    // If we get here, it worked!
 } catch (PDOException $e) {
-    // This will now give you a specific error if FreeSQLDatabase rejects you
-    error_log("Database Connection Error: " . $e->getMessage());
-    die("Internal Server Error. Please try again later.");
+    // This will tell us if it's "Access Denied" or "Connection Refused"
+    die("DATABASE CONNECTION FAILED: " . $e->getMessage());
 }
-?>
