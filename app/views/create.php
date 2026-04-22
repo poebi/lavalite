@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'paa_first_name' => $firstname,
             'paa_last_name' => $lastname,
             'paa_email' => $email,
-            'paa_password' => password_hash($password, PASSWORD_DEFAULT),
+            'password' => password_hash($password, PASSWORD_DEFAULT),
             'paa_gender' => $gender,
             'paa_adress' => $address,
             'role' => $role
